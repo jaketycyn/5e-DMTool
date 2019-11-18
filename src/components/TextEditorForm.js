@@ -230,9 +230,9 @@ const TextEditor = ({
       <StyledErrorDiv>{errors.npcRace}</StyledErrorDiv>
     ) : null}
     <label htmlFor="npcProfession">Profession</label>
-    <button id="randomProfession" type="button" onClick={handleChange}>
+    {/* <button id="randomProfession" type="button" onClick={handleChange}>
       Random
-    </button>
+    </button> */}
     <input
       id="npcProfession"
       name="npcProfession"
