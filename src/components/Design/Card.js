@@ -29,8 +29,9 @@ const Card = npc => (
       {npc.npcName} ({npc.npcRace} {"  "}
       {npc.npcProfession})
     </TitleInfo>
-    <BackgroundInfo>Info about character that will be shortened</BackgroundInfo>
-    <Accordion {...npc} />
+    <BackgroundInfo>
+      <Accordion {...npc} />
+    </BackgroundInfo>
   </Main>
 );
 

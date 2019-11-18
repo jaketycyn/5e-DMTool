@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useCollapse from "react-collapsed";
 import styled from "styled-components";
 
@@ -20,21 +20,39 @@ const Button = styled.button`
 `;
 
 const HiddenContent = styled.div`
-  display: flex;
   justify-content: left;
-  background: lightgreen;
+  text-align: left;
 `;
 const Accordion = npc => {
   const { getCollapseProps, getToggleProps, isOpen } = useCollapse();
+  const [info, setInfo] = useState("");
 
-  console.log(npc.editorState);
+  // const sampleMarkup =
+  //   "<b>Bold text</b>, <i>Italic text</i><br/ ><br />" +
+  //   '<a href="http://www.facebook.com">Example link</a>';
+
+  // const blocksFromHTML = convertFromHTML(sampleMarkup);
+  // const state = ContentState.createFromBlockArray(
+  //   blocksFromHTML.contentBlocks,
+  //   blocksFromHTML.entityMap
+  // );
+
+  // this.state = {
+  //   editorState: EditorState.createWithContent(state)
+  // };
+  function createMarkup() {
+    return { __html: npc.editorState };
+  }
+
+  function dangerousHTML() {
+    return <div dangerouslySetInnerHTML={createMarkup()} />;
+  }
 
   return (
     <Wrapper>
       <Button {...getToggleProps()}>{isOpen ? "Collapse" : "Expand"}</Button>
       <HiddenContent {...getCollapseProps()}>
-        <p>{npc.npcProfession}</p>
-        <p>{npc.npcName}</p>
+        <div dangerouslySetInnerHTML={{ __html: npc.editorState }} />
       </HiddenContent>
     </Wrapper>
   );

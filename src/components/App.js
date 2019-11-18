@@ -6,7 +6,6 @@ import Card from "./Design/Card";
 function App() {
   return (
     <div className="App">
-      <Card />
       <TextEditorForm />
       <ShowCharacters />
     </div>

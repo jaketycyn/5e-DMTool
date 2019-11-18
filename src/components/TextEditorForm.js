@@ -12,7 +12,7 @@ import {
 import { RichEditorExample } from "./RichEditor";
 import { db } from "./Firebase";
 import styled from "styled-components";
-
+import { stateToHTML } from "draft-js-export-html";
 // *** addd yup if validation is requierd ***
 import * as Yup from "yup";
 
@@ -175,14 +175,15 @@ const formikEnhancer = withFormik({
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
     }, 1000);
-    const rawContentState = convertToRaw(
-      values.editorState.getCurrentContent()
-    );
+    // const rawContentState = convertToRaw(
+    //   values.editorState.getCurrentContent()
+    // );
+    const htmlConverted = stateToHTML(values.editorState.getCurrentContent());
     db.collection("Npc").add({
       npcName: values.npcName,
       npcRace: values.npcRace,
       npcProfession: values.npcProfession,
-      editorState: rawContentState
+      editorState: htmlConverted
     });
   },
   handleChange: e => {
